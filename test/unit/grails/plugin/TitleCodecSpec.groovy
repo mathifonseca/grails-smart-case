@@ -7,8 +7,6 @@ import spock.lang.Specification
 @TestMixin(GrailsUnitTestMixin)
 class TitleCodecSpec extends Specification {
 
-    private config = [:]
-
     void "title case an empty string"() {
         given:
             String str = ""
@@ -110,11 +108,18 @@ class TitleCodecSpec extends Specification {
 
     void "title case with forced language to ES"() {
         given:
-            config.forcedLanguage = 'es'
-            config.es.forced.lower = []
-            config.es.forced.upper = []
-            config.es.forced.unchanged = []
-
+            TitleCodec.config = [
+                smartCase : [ 
+                    forcedLanguage : 'es',
+                    es : [
+                        forced : [
+                            lower : [],
+                            upper : [],
+                            unchanged : []
+                        ]
+                    ]
+                ]
+            ]
             String str = 'Hello, my name is Mathias'
         when:
             str = TitleCodec.encode(str)
@@ -124,8 +129,18 @@ class TitleCodecSpec extends Specification {
 
     void "title case with forced language to ES and lower forced for EN"() {
         given:
-            config.forcedLanguage = 'es'
-            config.en.forced.lower = ['my','name','is']
+            TitleCodec.config = [
+                smartCase : [ 
+                    forcedLanguage : 'es',
+                    en : [
+                        forced : [
+                            lower : ['my','name','is'],
+                            upper : [],
+                            unchanged : []
+                        ]
+                    ]
+                ]
+            ]
             String str = 'Hello, my name is Mathias'
         when:
             str = TitleCodec.encode(str)
@@ -135,8 +150,18 @@ class TitleCodecSpec extends Specification {
 
     void "title case with forced language to EN and lower forced for EN from upper"() {
         given:
-            config.forcedLanguage = 'en'
-            config.en.forced.lower = ['my','name','is']
+            TitleCodec.config = [
+                smartCase : [ 
+                    forcedLanguage : 'en',
+                    en : [
+                        forced : [
+                            lower : ['my','name','is'],
+                            upper : [],
+                            unchanged : []
+                        ]
+                    ]
+                ]
+            ]
             String str = 'Hello, MY NAME IS MATHIAS'
         when:
             str = TitleCodec.encode(str)
@@ -146,9 +171,18 @@ class TitleCodecSpec extends Specification {
 
     void "title case with forced language to EN and upper forced for EN from lower"() {
         given:
-            config.forcedLanguage = 'en'
-            config.en.forced.lower = ['name','is']
-            config.en.forced.upper = ['my']
+            TitleCodec.config = [
+                smartCase : [ 
+                    forcedLanguage : 'en',
+                    en : [
+                        forced : [
+                            lower : ['name','is'],
+                            upper : ['my'],
+                            unchanged : []
+                        ]
+                    ]
+                ]
+            ]
             String str = 'Hello, my name is mathias'
         when:
             str = TitleCodec.encode(str)
@@ -158,10 +192,18 @@ class TitleCodecSpec extends Specification {
 
     void "title case with forced language to EN and lower, upper and unchanged forced for EN"() {
         given:
-            config.forcedLanguage = 'en'
-            config.en.forced.lower = ['my']
-            config.en.forced.upper = ['name']
-            config.en.forced.unchanged = ['MaThIaS']
+            TitleCodec.config = [
+                smartCase : [ 
+                    forcedLanguage : 'en',
+                    en : [
+                        forced : [
+                            lower : ['my'],
+                            upper : ['name'],
+                            unchanged : ['MaThIaS']
+                        ]
+                    ]
+                ]
+            ]
             String str = 'Hello, my name is MaThIaS'
         when:
             str = TitleCodec.encode(str)
@@ -171,9 +213,18 @@ class TitleCodecSpec extends Specification {
 
     void "title case with comma messing around"() {
         given:
-            config.forcedLanguage = 'en'
-            config.en.forced.upper = ['hello']
-            config.en.forced.lower = ['my','name','is']
+            TitleCodec.config = [
+                smartCase : [ 
+                    forcedLanguage : 'en',
+                    en : [
+                        forced : [
+                            lower : ['my','name','is'],
+                            upper : ['hello'],
+                            unchanged : []
+                        ]
+                    ]
+                ]
+            ]
             String str = 'Hello, my name is Mathias'
         when:
             str = TitleCodec.encode(str)

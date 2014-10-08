@@ -15,8 +15,7 @@ class SmartCaseGrailsPlugin {
 
     def doWithSpring = {
         mergeConfig(application)
-
-		  TitleCodec.config = application.config
+        TitleCodec.config = application.config
     }
 
     def onConfigChange = { event ->
@@ -31,4 +30,5 @@ class SmartCaseGrailsPlugin {
         config.putAll(secondaryConfig.smartCase.merge(currentConfig))
         app.config.smartCase = config
     }
+
 }

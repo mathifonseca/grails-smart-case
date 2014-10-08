@@ -5,7 +5,6 @@ import org.springframework.web.servlet.support.RequestContextUtils as RCU
 
 class TitleCodec {
 
-	// dependency-injected
 	static config
 
 	static encode = { str ->
@@ -42,26 +41,27 @@ class TitleCodec {
 
 				encodedWord = word.toLowerCase().capitalize()
 			}
+
 		}
 
 		return encodedWord
 	}
 
 	private static boolean isForcedLower(word) {
-		(config?."$currentLanguage"?.forced?.lower ?: []).contains(word.toLowerCase())
+		(config?.smartCase?."$currentLanguage"?.forced?.lower ?: []).contains(word.toLowerCase())
 	}
 
 	private static boolean isForcedUpper(word) {
-		(config?."$currentLanguage"?.forced?.upper ?: []).contains(word.toLowerCase())
+		(config?.smartCase?."$currentLanguage"?.forced?.upper ?: []).contains(word.toLowerCase())
 	}
 
 	private static boolean isForcedUnchanged(word) {
-		(config?."$currentLanguage"?.forced?.unchanged ?: []).contains(word)
+		(config?.smartCase?."$currentLanguage"?.forced?.unchanged ?: []).contains(word)
 	}
 
 	private static String getCurrentLanguage() {
 
-		def lang = config.forcedLanguage
+		def lang = config?.smartCase?.forcedLanguage
 
 		if (!lang) {
 			try {
@@ -70,6 +70,8 @@ class TitleCodec {
 			catch (Exception ignored) {}
 		}
 
-		lang ?: config.defaultLanguage ?: 'es'
+		lang ?: config?.smartCase?.defaultLanguage ?: 'es'
+
 	}
+
 }
