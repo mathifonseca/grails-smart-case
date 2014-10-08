@@ -2,9 +2,11 @@ package grails.plugin
 
 import org.codehaus.groovy.grails.web.util.WebUtils
 import org.springframework.web.servlet.support.RequestContextUtils as RCU
-import grails.util.Holders
 
 class TitleCodec {
+
+	// dependency-injected
+	static config
 
 	static encode = { str ->
 
@@ -15,14 +17,12 @@ class TitleCodec {
 			def words = str.split(/\s+/).collect { encodeWord(it) }
 
 			str = words.join(' ')
-
 		}
 
 		return str
-
 	}
 
-	private static String encodeWord(word) {
+	private static String encodeWord(String word) {
 
 		def encodedWord = word
 
@@ -41,61 +41,35 @@ class TitleCodec {
 			} else {
 
 				encodedWord = word.toLowerCase().capitalize()
-
 			}
-
 		}
 
 		return encodedWord
-
 	}
 
 	private static boolean isForcedLower(word) {
-
-		def list = Holders.config.smartCase?."${getCurrentLanguage()}"?.forced?.lower
-
-		return list ? list.contains(word.toLowerCase()) : false
-
+		(config?."$currentLanguage"?.forced?.lower ?: []).contains(word.toLowerCase())
 	}
 
 	private static boolean isForcedUpper(word) {
-
-		def list = Holders.config.smartCase?."${getCurrentLanguage()}"?.forced?.upper
-
-		return list ? list.contains(word.toLowerCase()) : false
-
+		(config?."$currentLanguage"?.forced?.upper ?: []).contains(word.toLowerCase())
 	}
 
 	private static boolean isForcedUnchanged(word) {
-
-		def list = Holders.config.smartCase?."${getCurrentLanguage()}"?.forced?.unchanged
-
-		return list ? list.contains(word) : false
-
+		(config?."$currentLanguage"?.forced?.unchanged ?: []).contains(word)
 	}
 
 	private static String getCurrentLanguage() {
 
-		def lang = Holders.config.smartCase.forcedLanguage
+		def lang = config.forcedLanguage
 
 		if (!lang) {
-
 			try {
-
-				lang = RCU.getLocale(WebUtils.retrieveGrailsWebRequest().getCurrentRequest())
-
-			} catch (Exception ex) {}
-
+				lang = RCU.getLocale(WebUtils.retrieveGrailsWebRequest().currentRequest)
+			}
+			catch (Exception ignored) {}
 		}
 
-		if (!lang) {
-
-			lang = Holders.config.smartCase.defaultLanguage ?: 'es'
-
-		}
-
-		return lang
-
+		lang ?: config.defaultLanguage ?: 'es'
 	}
-
 }
