@@ -7,6 +7,8 @@ import spock.lang.Specification
 @TestMixin(GrailsUnitTestMixin)
 class TitleCodecSpec extends Specification {
 
+    private config = [:]
+
     void "title case an empty string"() {
         given:
             String str = ""
@@ -177,9 +179,5 @@ class TitleCodecSpec extends Specification {
             str = TitleCodec.encode(str)
         then:
             str == 'HELLO, my name is Mathias'
-    }
-
-    private getConfig() {
-        grails.util.Holders.config.smartCase
     }
 }

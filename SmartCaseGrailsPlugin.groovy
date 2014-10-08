@@ -1,3 +1,4 @@
+import grails.plugin.TitleCodec
 import grails.util.Environment
 
 class SmartCaseGrailsPlugin {
@@ -14,6 +15,8 @@ class SmartCaseGrailsPlugin {
 
     def doWithSpring = {
         mergeConfig(application)
+
+		  TitleCodec.config = application.config
     }
 
     def onConfigChange = { event ->

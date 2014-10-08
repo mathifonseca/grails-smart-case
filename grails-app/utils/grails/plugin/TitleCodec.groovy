@@ -1,11 +1,12 @@
 package grails.plugin
 
-import grails.util.Holders
-
 import org.codehaus.groovy.grails.web.util.WebUtils
 import org.springframework.web.servlet.support.RequestContextUtils as RCU
 
 class TitleCodec {
+
+	// dependency-injected
+	static config
 
 	static encode = { str ->
 
@@ -70,9 +71,5 @@ class TitleCodec {
 		}
 
 		lang ?: config.defaultLanguage ?: 'es'
-	}
-
-	private static getConfig() {
-		Holders.config.smartCase
 	}
 }
