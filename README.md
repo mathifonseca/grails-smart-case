@@ -16,7 +16,11 @@ The initial version will focus on formatting Strings, but in the future, the ide
 
 We are all used to methods like `toLowerCase()`, `toUpperCase()` and even `capitalize()`. And some combination of these lets you format your Strings the way you usually want it. But sometimes you end up having a capital letter where you don't want it or missing one where there should be one.
 
-This plugin adds a new [custom codec](http://grails.org/doc/latest/ref/Plug-ins/codecs.html) for title casing your strings.
+This plugin adds a new [custom codec](http://grails.org/doc/latest/ref/Plug-ins/codecs.html) for title casing your strings by calling this magic method:
+
+```groovy
+String foo = bar.encodeAsTitle()
+```
 
 Here is a comparison with some example phrases:
 
