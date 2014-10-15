@@ -65,7 +65,7 @@ class TitleCodec {
 
 		if (!lang) {
 			try {
-				lang = RCU.getLocale(WebUtils.retrieveGrailsWebRequest().currentRequest)
+				lang = RCU.getLocale(WebUtils.retrieveGrailsWebRequest().currentRequest).toString()[0..1]
 			}
 			catch (Exception ignored) {}
 		}
