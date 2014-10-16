@@ -13,15 +13,31 @@ class TitleCodec {
 
 			str = str.toString().trim()
 
-			def words = str.split(/\s+/).collect { encodeWord(it) }
+			def words = str.split(/\s+/)
 
-			str = words.join(' ')
+			if (words) {
+
+				if (words.size() == 1) {
+
+					words = [ encodeWord(words[0], true) ]
+
+				} else {
+
+					words = [ encodeWord(words[0], true) ] + words[1..-1].collect { encodeWord(it) }
+
+				}
+
+				str = words.join(' ')
+
+			}
+
 		}
 
 		return str
+
 	}
 
-	private static String encodeWord(String word) {
+	private static String encodeWord(String word, boolean first = false) {
 
 		def encodedWord = word
 
@@ -29,7 +45,7 @@ class TitleCodec {
 
 		if (!isForcedUnchanged(comparableWord)) {
 
-			if (isForcedLower(comparableWord)) {
+			if (!first && isForcedLower(comparableWord)) {
 
 				encodedWord = word.toLowerCase()
 

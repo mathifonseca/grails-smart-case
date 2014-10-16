@@ -231,4 +231,24 @@ class TitleCodecSpec extends Specification {
         then:
             str == 'HELLO, my name is Mathias'
     }
+
+    void "title case with forced lower but first word"() {
+        given:
+            TitleCodec.config = [
+                smartCase : [ 
+                    forcedLanguage : 'en',
+                    en : [
+                        forced : [
+                            lower : ['my','name','is'],
+                            unchanged : []
+                        ]
+                    ]
+                ]
+            ]
+            String str = 'my name is Mathias'
+        when:
+            str = TitleCodec.encode(str)
+        then:
+            str == 'My name is Mathias'
+    }
 }
