@@ -1,4 +1,4 @@
-package grails.plugin
+package grails.plugin.smartcase
 
 import grails.test.mixin.TestMixin
 import grails.test.mixin.support.GrailsUnitTestMixin
