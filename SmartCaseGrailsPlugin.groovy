@@ -1,4 +1,4 @@
-import grails.plugin.TitleCodec
+import grails.plugin.smartcase.TitleCodec
 import grails.util.Environment
 
 class SmartCaseGrailsPlugin {

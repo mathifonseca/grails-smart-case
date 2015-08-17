@@ -1,3 +1,5 @@
+grails.project.groupId = 'grails.plugin.smartcase'
+
 log4j = {
 	error 'org.codehaus.groovy.grails',
 	      'org.springframework',

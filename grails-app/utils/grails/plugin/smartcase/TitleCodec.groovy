@@ -1,4 +1,4 @@
-package grails.plugin
+package grails.plugin.smartcase
 
 import org.codehaus.groovy.grails.web.util.WebUtils
 import org.springframework.web.servlet.support.RequestContextUtils as RCU
