@@ -251,4 +251,5 @@ class TitleCodecSpec extends Specification {
         then:
             str == 'My name is Mathias'
     }
+
 }
