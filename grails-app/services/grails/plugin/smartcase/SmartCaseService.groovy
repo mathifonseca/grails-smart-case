@@ -39,7 +39,7 @@ class SmartCaseService {
 
         }
 
-        println "$fromCase -> $toCase | $original -> $converted"
+        log.debug "$fromCase -> $toCase | $original -> $converted"
 
         return converted
 

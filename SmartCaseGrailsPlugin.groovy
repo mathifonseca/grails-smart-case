@@ -2,7 +2,7 @@ import grails.plugin.smartcase.TitleCodec
 import grails.util.Environment
 
 class SmartCaseGrailsPlugin {
-    def version = '1.3.0'
+    def version = '1.3.1'
     def grailsVersion = "2.3 > *"
     def title = "Smart Case Plugin"
     def author = "Mathias Fonseca"
