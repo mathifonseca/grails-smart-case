@@ -19,6 +19,7 @@ grails.project.dependency.resolution = {
         provided(':version-update:1.3.2') {
             export = false
         }
+        compile "org.grails.plugins:slug-generator:0.5"
     }
     
 }

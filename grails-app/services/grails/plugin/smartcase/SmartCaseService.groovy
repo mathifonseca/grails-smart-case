@@ -77,6 +77,14 @@ class SmartCaseService {
 
     }
 
+    // HUMAN -> SLUG
+
+    String fromHumanToSlug(String human) {
+
+        return human.encodeAsSlug()
+
+    }
+
     // SCREAMING_SNAKE -> HUMAN
 
     String fromScreamingSnakeToHuman(String screamingSnake) {
@@ -106,6 +114,14 @@ class SmartCaseService {
     String fromScreamingSnakeToSnake(String screamingSnake) {
 
         return screamingSnake.toLowerCase()
+
+    }
+
+    // SCREAMING_SNAKE -> SLUG
+
+    String fromScreamingSnakeToSlug(String screamingSnake) {
+
+        return screamingSnake.encodeAsSlug()
 
     }
 
@@ -141,6 +157,14 @@ class SmartCaseService {
 
     }
 
+    // SNAKE -> SLUG
+
+    String fromSnakeToSlug(String snake) {
+
+        return snake.encodeAsSlug()
+
+    }
+
     // UPPER_CAMEL -> CAMEL
 
     String fromUpperCamelToCamel(String upperCamel) {
@@ -170,6 +194,14 @@ class SmartCaseService {
     String fromUpperCamelToHuman(String upperCamel) {
 
         return fromCamelToHuman(upperCamel)
+
+    }
+
+    // UPPER_CAMEL -> SLUG
+
+    String fromUpperCamelToSlug(String upperCamel) {
+
+        return fromCamelToHuman(upperCamel).encodeAsSlug()
 
     }
 
@@ -205,6 +237,54 @@ class SmartCaseService {
 
     }
 
+    // CAMEL -> SLUG
+
+    String fromCamelToSlug(String camel) {
+
+        return fromCamelToHuman(camel).encodeAsSlug()
+
+    }
+
+    // SLUG -> HUMAN
+
+    String fromSlugToHuman(String slug) {
+
+        return slug.replaceAll('-', ' ')
+
+    }
+
+    // SLUG -> CAMEL
+
+    String fromSlugToCamel(String slug) {
+
+        return toFirstLowerCase(fromSlugToUpperCamel(slug))
+
+    }
+
+    // SLUG -> UPPER_CAMEL
+
+    String fromSlugToUpperCamel(String slug) {
+
+        return slug.replaceAll( /([a-z0-9]+-?)/, { all, word -> word.replace('-','').capitalize() })
+
+    }
+
+    // SLUG -> SNAKE
+
+    String fromSlugToSnake(String slug) {
+
+        return slug.replaceAll('-', '_')
+
+    }
+
+    // SLUG -> SCREAMING_SNAKE
+
+    String fromSlugToScreamingSnake(String slug) {
+
+        return slug.replaceAll('-', '_').toUpperCase()
+
+    }
+
     private final Case detectCase(String original) {
 
         Case detected = Case.UNKNOWN
@@ -215,6 +295,8 @@ class SmartCaseService {
             detected = Case.SCREAMING_SNAKE
         } else if (original ==~ /([a-z0-9]+_?)+/) {
             detected = Case.SNAKE
+        } else if (original ==~ /([a-z0-9]+-?)+/) {
+            detected = Case.SLUG
         } else if (original ==~ /([a-z0-9]+)([A-Za-z0-9]*)/) {
             detected = Case.CAMEL
         } else if (original ==~ /([A-Z0-9]+)([A-Za-z0-9]*)/) {

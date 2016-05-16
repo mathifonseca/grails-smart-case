@@ -7,6 +7,7 @@ enum Case {
     SCREAMING_SNAKE,
     SNAKE,
     UPPER_CAMEL,
-    CAMEL
+    CAMEL,
+    SLUG
 
 }

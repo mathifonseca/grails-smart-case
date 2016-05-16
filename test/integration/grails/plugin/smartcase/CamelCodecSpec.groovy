@@ -1,16 +1,11 @@
 package grails.plugin.smartcase
 
-import grails.test.mixin.Mock
-import grails.test.mixin.TestFor
+import grails.test.mixin.TestMixin
+import grails.test.mixin.support.GrailsUnitTestMixin
 import spock.lang.*
 
-@TestFor(SmartCaseService)
+@TestMixin(GrailsUnitTestMixin)
 class CamelCodecSpec extends Specification {
-
-    void setup() {
-        def mockService = Mock(SmartCaseService)
-        CamelCodec.metaClass.smartCaseService = mockService
-    }
 
     void "test encode"() {
         given:
