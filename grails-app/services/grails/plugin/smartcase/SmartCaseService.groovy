@@ -1,5 +1,7 @@
 package grails.plugin.smartcase
 
+import grails.plugins.SlugCodec
+
 class SmartCaseService {
 
     String convert(Case fromCase, Case toCase, String original) {
@@ -81,7 +83,7 @@ class SmartCaseService {
 
     String fromHumanToSlug(String human) {
 
-        return human.encodeAsSlug()
+        return SlugCodec.encode(human, true)
 
     }
 
@@ -121,7 +123,7 @@ class SmartCaseService {
 
     String fromScreamingSnakeToSlug(String screamingSnake) {
 
-        return screamingSnake.encodeAsSlug()
+        return SlugCodec.encode(screamingSnake, true)
 
     }
 
@@ -161,7 +163,7 @@ class SmartCaseService {
 
     String fromSnakeToSlug(String snake) {
 
-        return snake.encodeAsSlug()
+        return SlugCodec.encode(snake, true)
 
     }
 
@@ -201,7 +203,7 @@ class SmartCaseService {
 
     String fromUpperCamelToSlug(String upperCamel) {
 
-        return fromCamelToHuman(upperCamel).encodeAsSlug()
+        return SlugCodec.encode(fromCamelToHuman(upperCamel), true)
 
     }
 
@@ -241,7 +243,7 @@ class SmartCaseService {
 
     String fromCamelToSlug(String camel) {
 
-        return fromCamelToHuman(camel).encodeAsSlug()
+        return SlugCodec.encode(fromCamelToHuman(camel), true)
 
     }
 
