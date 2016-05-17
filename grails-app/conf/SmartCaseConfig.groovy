@@ -3,7 +3,23 @@ smartCase {
 	//forcedLanguage = 'es'
 
 	defaultLanguage = 'es'
-	
+
+    en {
+        forced {
+            lower = [
+                'the',
+                'and',
+                'but',
+                'for',
+                'nor',
+                'or',
+                'so',
+                'yet',
+                'of'
+            ]
+        }
+    }
+
 	es {
 		forced {
 			noChange = [
