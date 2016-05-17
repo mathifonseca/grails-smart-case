@@ -8,8 +8,6 @@ class SlugCodec {
 
         if (str) {
 
-            println 'aca'
-
             def smartCaseService = Holders.grailsApplication.mainContext.getBean 'smartCaseService'
 
             str = smartCaseService.convert(Case.UNKNOWN, Case.SLUG, str)
