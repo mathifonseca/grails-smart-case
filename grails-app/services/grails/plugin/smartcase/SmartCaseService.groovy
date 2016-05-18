@@ -11,17 +11,21 @@ class SmartCaseService {
         try {
 
             if (!original) {
-                throw new SmartCaseException('No text to convert')
+
+                converted = original
+
+            } else {
+
+                if (fromCase == Case.UNKNOWN) {
+                    fromCase = detectCase(original)
+                }
+
+                def camelFrom = fromScreamingSnakeToUpperCamel(fromCase.toString())
+                def camelTo = fromScreamingSnakeToUpperCamel(toCase.toString())
+
+                converted = "from${camelFrom}To${camelTo}"(original)
+
             }
-
-            if (fromCase == Case.UNKNOWN) {
-                fromCase = detectCase(original)
-            }
-
-            def camelFrom = fromScreamingSnakeToUpperCamel(fromCase.toString())
-            def camelTo = fromScreamingSnakeToUpperCamel(toCase.toString())
-
-            converted = "from${camelFrom}To${camelTo}"(original)
 
         } catch (MissingMethodException ex) {
 
