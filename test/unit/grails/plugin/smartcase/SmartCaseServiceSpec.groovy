@@ -30,9 +30,7 @@ class SmartCaseServiceSpec extends Specification {
         when:
             String converted = service.convert(SNAKE, CAMEL, original)
         then:
-            !converted
-            def ex = thrown(SmartCaseException)
-            ex.message == 'No text to convert'
+            converted == original
     }
 
     void "detect human"() {
@@ -93,36 +91,36 @@ class SmartCaseServiceSpec extends Specification {
             converted == expected
         where:
             fromCase | original | toCase | expected
-//            HUMAN | example.human | SCREAMING_SNAKE | example.screamingSnake
-//            HUMAN | example.human | SNAKE | example.snake
-//            HUMAN | example.human | CAMEL | example.camel
-//            HUMAN | example.human | UPPER_CAMEL | example.upperCamel
-//            HUMAN | example.human | SLUG | example.slug
-//            SCREAMING_SNAKE | example.screamingSnake | HUMAN | example.human
-//            SCREAMING_SNAKE | example.screamingSnake | SNAKE | example.snake
-//            SCREAMING_SNAKE | example.screamingSnake | CAMEL | example.camel
-//            SCREAMING_SNAKE | example.screamingSnake | UPPER_CAMEL | example.upperCamel
-//            SCREAMING_SNAKE | example.screamingSnake | SLUG | example.slug
-//            SNAKE | example.snake | HUMAN | example.human
-//            SNAKE | example.snake | SCREAMING_SNAKE | example.screamingSnake
-//            SNAKE | example.snake | CAMEL | example.camel
-//            SNAKE | example.snake | UPPER_CAMEL | example.upperCamel
-//            SNAKE | example.snake | SLUG | example.slug
-//            CAMEL | example.camel | HUMAN | example.human
-//            CAMEL | example.camel | SNAKE | example.snake
-//            CAMEL | example.camel | SCREAMING_SNAKE | example.screamingSnake
-//            CAMEL | example.camel | UPPER_CAMEL | example.upperCamel
+            HUMAN | example.human | SCREAMING_SNAKE | example.screamingSnake
+            HUMAN | example.human | SNAKE | example.snake
+            HUMAN | example.human | CAMEL | example.camel
+            HUMAN | example.human | UPPER_CAMEL | example.upperCamel
+            HUMAN | example.human | SLUG | example.slug
+            SCREAMING_SNAKE | example.screamingSnake | HUMAN | example.human
+            SCREAMING_SNAKE | example.screamingSnake | SNAKE | example.snake
+            SCREAMING_SNAKE | example.screamingSnake | CAMEL | example.camel
+            SCREAMING_SNAKE | example.screamingSnake | UPPER_CAMEL | example.upperCamel
+            SCREAMING_SNAKE | example.screamingSnake | SLUG | example.slug
+            SNAKE | example.snake | HUMAN | example.human
+            SNAKE | example.snake | SCREAMING_SNAKE | example.screamingSnake
+            SNAKE | example.snake | CAMEL | example.camel
+            SNAKE | example.snake | UPPER_CAMEL | example.upperCamel
+            SNAKE | example.snake | SLUG | example.slug
+            CAMEL | example.camel | HUMAN | example.human
+            CAMEL | example.camel | SNAKE | example.snake
+            CAMEL | example.camel | SCREAMING_SNAKE | example.screamingSnake
+            CAMEL | example.camel | UPPER_CAMEL | example.upperCamel
             CAMEL | example.camel | SLUG | example.slug
-//            UPPER_CAMEL | example.upperCamel | SNAKE | example.snake
-//            UPPER_CAMEL | example.upperCamel | HUMAN | example.human
-//            UPPER_CAMEL | example.upperCamel | SCREAMING_SNAKE | example.screamingSnake
-//            UPPER_CAMEL | example.upperCamel | CAMEL | example.camel
+            UPPER_CAMEL | example.upperCamel | SNAKE | example.snake
+            UPPER_CAMEL | example.upperCamel | HUMAN | example.human
+            UPPER_CAMEL | example.upperCamel | SCREAMING_SNAKE | example.screamingSnake
+            UPPER_CAMEL | example.upperCamel | CAMEL | example.camel
             UPPER_CAMEL | example.upperCamel | SLUG | example.slug
-//            SLUG | example.slug | SNAKE | example.snake
-//            SLUG | example.slug | HUMAN | example.human
-//            SLUG | example.slug | SCREAMING_SNAKE | example.screamingSnake
-//            SLUG | example.slug | CAMEL | example.camel
-//            SLUG | example.slug | UPPER_CAMEL | example.upperCamel
+            SLUG | example.slug | SNAKE | example.snake
+            SLUG | example.slug | HUMAN | example.human
+            SLUG | example.slug | SCREAMING_SNAKE | example.screamingSnake
+            SLUG | example.slug | CAMEL | example.camel
+            SLUG | example.slug | UPPER_CAMEL | example.upperCamel
     }
 
     void "toFirstLowerCase"() {
