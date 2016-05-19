@@ -4,6 +4,8 @@ import grails.util.Holders
 
 class SlugCodec {
 
+	static order = 1
+
     static encode = { String str ->
 
         if (str) {

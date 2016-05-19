@@ -87,7 +87,7 @@ class SmartCaseService {
 
     String fromHumanToSlug(String human) {
 
-        return SlugCodec.encode(human, true)
+        return slugify(human)
 
     }
 
@@ -127,7 +127,7 @@ class SmartCaseService {
 
     String fromScreamingSnakeToSlug(String screamingSnake) {
 
-        return SlugCodec.encode(screamingSnake, true)
+        return slugify(screamingSnake)
 
     }
 
@@ -167,7 +167,7 @@ class SmartCaseService {
 
     String fromSnakeToSlug(String snake) {
 
-        return SlugCodec.encode(snake, true)
+        return slugify(snake)
 
     }
 
@@ -207,7 +207,7 @@ class SmartCaseService {
 
     String fromUpperCamelToSlug(String upperCamel) {
 
-        return SlugCodec.encode(fromCamelToHuman(upperCamel), true)
+        return slugify(fromCamelToHuman(upperCamel))
 
     }
 
@@ -247,7 +247,7 @@ class SmartCaseService {
 
     String fromCamelToSlug(String camel) {
 
-        return SlugCodec.encode(fromCamelToHuman(camel), true)
+        return slugify(fromCamelToHuman(camel))
 
     }
 
@@ -319,6 +319,10 @@ class SmartCaseService {
     private final String toFirstLowerCase(String str) {
         if (!str) return str
         return str[0].toLowerCase() + (str.size() > 1 ? str[1..-1] : '')
+    }
+
+    private String slugify(String original) {
+        return SlugCodec.encode(original).replaceAll(/[^a-z0-9-]/, '')
     }
 
 }
