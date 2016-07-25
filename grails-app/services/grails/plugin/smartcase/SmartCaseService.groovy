@@ -309,8 +309,10 @@ class SmartCaseService {
             detected = Case.UPPER_CAMEL
         }
 
-        if (detected == Case.UNKNOWN)
-            throw new SmartCaseException("Could not detect original case for string \"${original}\", please call service with specific Case value")
+        if (detected == Case.UNKNOWN) {
+            detected = Case.HUMAN
+            //throw new SmartCaseException("Could not detect original case for string \"${original}\", please call service with specific Case value")
+        }
 
         return detected
 
